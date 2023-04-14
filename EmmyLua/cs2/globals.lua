@@ -679,7 +679,7 @@ function LerpVectors(startVector, endVector, factor) end
 ---Register as a listener for a game event from script.
 ---@param eventname string
 ---@param callback function
----@param context table
+---@param context table | nil
 ---@return number
 function ListenToGameEvent(eventname, callback, context) end
 
