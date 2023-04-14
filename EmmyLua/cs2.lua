@@ -1,0 +1,11 @@
+---@meta
+
+-- Quick patches to retain same type information but also work, perhaps sort this out later
+---@alias handle any
+---@alias unsigned number
+---@alias uint64 number
+---@alias utlstringtoken any
+---@alias Quaternion any
+---@alias ehandle any
+---@alias Vector2D any
+---@alias ParticleAttachment_t any
