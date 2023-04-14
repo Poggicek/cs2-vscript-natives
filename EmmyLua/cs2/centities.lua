@@ -1,7 +1,7 @@
 ---@meta
 
 ---@class CEntities
-CEntities = {}
+Entities = {}
 
 ---Creates an entity by classname
 ---@param classname string
