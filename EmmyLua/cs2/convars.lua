@@ -31,14 +31,14 @@ function Convars:GetStr(name) end
 ---@param name string
 ---@param func handle
 ---@param helpString string
----@param flags number
+---@param flags ConvarFlag
 function Convars:RegisterCommand(name, func, helpString, flags) end
 
 ---Register a new console variable.
 ---@param name string
 ---@param defaultValue string
 ---@param helpString string
----@param flags number
+---@param flags ConvarFlag
 function Convars:RegisterConvar(name, defaultValue, helpString, flags) end
 
 ---Sets the value of the convar to the bool.
