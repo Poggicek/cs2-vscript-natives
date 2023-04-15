@@ -1,6 +1,6 @@
 ---@meta
 
----@class CPointClientUIWorldPanel
+---@class CPointClientUIWorldPanel: CBaseModelEntity
 CPointClientUIWorldPanel = {}
 
 ---Tells the panel to accept user input.

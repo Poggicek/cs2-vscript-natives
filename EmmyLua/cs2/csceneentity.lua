@@ -1,6 +1,6 @@
 ---@meta
 
----@class CSceneEntity
+---@class CSceneEntity: CBaseEntity
 CSceneEntity = {}
 
 ---Adds a team (by index) to the broadcast list

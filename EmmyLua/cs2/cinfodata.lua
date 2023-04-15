@@ -1,6 +1,6 @@
 ---@meta
 
----@class CInfoData
+---@class CInfoData: CBaseEntity
 CInfoData = {}
 
 ---Query color data for this key

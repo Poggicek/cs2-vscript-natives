@@ -1,6 +1,6 @@
 ---@meta
 
----@class CLogicRelay
+---@class CLogicRelay: CBaseEntity
 CLogicRelay = {}
 
 ---Triggers the logic_relay

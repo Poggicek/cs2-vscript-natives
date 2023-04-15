@@ -1,6 +1,6 @@
 ---@meta
 
----@class CInfoWorldLayer
+---@class CInfoWorldLayer: CBaseEntity
 CInfoWorldLayer = {}
 
 ---Hides this layer

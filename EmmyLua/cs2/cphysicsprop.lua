@@ -1,6 +1,6 @@
 ---@meta
 
----@class CPhysicsProp
+---@class CPhysicsProp: CBaseModelEntity
 CPhysicsProp = {}
 
 ---Disable motion for the prop

@@ -1,6 +1,6 @@
 ---@meta
 
----@class CEnvProjectedTexture
+---@class CEnvProjectedTexture: CBaseModelEntity
 CEnvProjectedTexture = {}
 
 ---Set light maximum range

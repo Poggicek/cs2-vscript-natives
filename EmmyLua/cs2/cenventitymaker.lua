@@ -1,6 +1,6 @@
 ---@meta
 
----@class CEnvEntityMaker
+---@class CEnvEntityMaker: CBaseEntity
 CEnvEntityMaker = {}
 
 ---Create an entity at the location of the maker

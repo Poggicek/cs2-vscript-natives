@@ -1,6 +1,6 @@
 ---@meta
 
----@class CMarkupVolumeTagged
+---@class CMarkupVolumeTagged: CBaseModelEntity
 CMarkupVolumeTagged = {}
 
 ---Returns whether this volume have the given tag.

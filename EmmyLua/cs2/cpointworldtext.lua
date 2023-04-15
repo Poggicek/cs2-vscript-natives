@@ -1,6 +1,6 @@
 ---@meta
 
----@class CPointWorldText
+---@class CPointWorldText: CBaseModelEntity
 CPointWorldText = {}
 
 ---Set the message on this entity.
