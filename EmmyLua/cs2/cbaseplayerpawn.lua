@@ -1,6 +1,6 @@
 ---@meta
 
----@class CBasePlayerPawn: CBaseFlex
+---@class CBasePlayerPawn: CBaseCombatCharacter
 CBasePlayerPawn = {}
 
 ---Returns the controller for this pawn

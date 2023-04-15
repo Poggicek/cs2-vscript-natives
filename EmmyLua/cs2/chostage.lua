@@ -1,6 +1,6 @@
 ---@meta
 
----@class CHostage: CBaseFlex
+---@class CHostage: CBaseCombatCharacter
 CHostage = {}
 
 ---Get whether the hostage is currently being carried or not
