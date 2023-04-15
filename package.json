@@ -7,7 +7,7 @@
     "url": "https://github.com/poggicek/cs2-vscript-natives"
   },
   "description": "",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "engines": {
     "vscode": "^1.77.0"
   },
@@ -19,6 +19,20 @@
     "sumneko.lua"
   ],
   "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "cs2-vscript-natives.disableAnnotations",
+        "title": "Disable Annotations",
+        "category": "CS2 VScript"
+      },
+      {
+        "command": "cs2-vscript-natives.enableAnnotations",
+        "title": "Enable Annotations",
+        "category": "CS2 VScript"
+      }
+    ]
+  },
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "yarn run compile",

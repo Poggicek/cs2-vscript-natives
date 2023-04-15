@@ -33,7 +33,24 @@ function setExternalLibrary(folder: string, enable: boolean) {
 	}
 }
 
-setExternalLibrary("EmmyLua", true);
+export function activate(context: vscode.ExtensionContext) {
+	context.globalState.setKeysForSync(["disableExternalLib"]);
+
+	if(!context.globalState.get("disableExternalLib"))
+	{
+		setExternalLibrary("EmmyLua", true);
+	}
+
+	context.subscriptions.push(vscode.commands.registerCommand("cs2-vscript-natives.disableAnnotations", () => {
+		setExternalLibrary("EmmyLua", false);
+		context.globalState.update("disableExternalLib", 1);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand("cs2-vscript-natives.enableAnnotations", () => {
+		setExternalLibrary("EmmyLua", true);
+		context.globalState.update("disableExternalLib", 0);
+	}));
+}
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
