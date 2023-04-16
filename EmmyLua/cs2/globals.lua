@@ -978,3 +978,21 @@ function cvar_getf(cvarName) end
 ---@param value number
 ---@return boolean
 function cvar_setf(cvarName, value) end
+
+---@param target string
+---@param action string
+---@param delay number
+---@param activator handle
+function EntFire(self, target, action, value, delay, activator) end
+
+---@param target handle
+---@param action string
+---@param delay number
+---@param activator handle
+function EntFireByHandle(self, target, action, value, delay, activator) end
+
+---A function to re-lookup a function by name every time.
+---@param mt table
+---@param name string
+---@return function
+function Dynamic_Wrap(mt, name) end
