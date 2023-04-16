@@ -677,7 +677,7 @@ function IsValidEntity(entity) end
 function LerpVectors(startVector, endVector, factor) end
 
 ---Register as a listener for a game event from script.
----@param eventname string
+---@param eventname CS2Event
 ---@param callback function
 ---@param context table | nil
 ---@return number

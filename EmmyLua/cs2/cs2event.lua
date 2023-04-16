@@ -1,0 +1,286 @@
+---@meta
+---@alias CS2Event
+---|"server_spawn" # `hostname, address, port, game, mapname, addonname, maxplayers, os, dedicated, password`
+---|"server_pre_shutdown" # `reason`
+---|"server_shutdown" # `reason`
+---|"server_message" # `text`
+---|"server_cvar" # `cvarname, cvarvalue`
+---|"player_activate" # `userid`
+---|"player_connect_full" # `userid`
+---|"player_full_update" # `userid, count`
+---|"player_connect" # `name, userid, networkid, xuid, address, bot`
+---|"player_disconnect" # `userid, reason, name, networkid, xuid, PlayerID`
+---|"player_info" # `name, userid, steamid, bot`
+---|"player_spawn" # `userid, userid_pawn`
+---|"player_team" # `userid, team, oldteam, disconnect, silent, isbot, userid_pawn`
+---|"local_player_team" # ``
+---|"local_player_controller_team" # ``
+---|"player_changename" # `userid, oldname, newname`
+---|"player_hurt" # `userid, attacker, health, armor, weapon, dmg_health, dmg_armor, hitgroup, userid_pawn, attacker_pawn`
+---|"player_chat" # `teamonly, userid, text`
+---|"local_player_pawn_changed" # ``
+---|"teamplay_broadcast_audio" # `team, sound`
+---|"finale_start" # `rushes`
+---|"player_stats_updated" # `forceupload`
+---|"user_data_downloaded" # ``
+---|"ragdoll_dissolved" # `entindex`
+---|"team_info" # `teamid, teamname`
+---|"team_score" # `teamid, score`
+---|"hltv_cameraman" # `userid`
+---|"hltv_chase" # `target1, target2, distance, theta, phi, inertia, ineye`
+---|"hltv_rank_camera" # `index, rank, target`
+---|"hltv_rank_entity" # `userid, rank, target`
+---|"hltv_fixed" # `posx, posy, posz, theta, phi, offset, fov, target`
+---|"hltv_message" # `text`
+---|"hltv_status" # `clients, slots, proxies, master`
+---|"hltv_title" # `text`
+---|"hltv_chat" # `text, steamID`
+---|"hltv_versioninfo" # `version`
+---|"hltv_replay" # `delay, reason`
+---|"demo_start" # `local, dota_combatlog_list, dota_hero_chase_list, dota_pick_hero_list`
+---|"demo_stop" # ``
+---|"demo_skip" # `local, playback_tick, skipto_tick, user_message_list, dota_hero_chase_list`
+---|"map_shutdown" # ``
+---|"map_transition" # ``
+---|"hostname_changed" # `hostname`
+---|"difficulty_changed" # `newDifficulty, oldDifficulty, strDifficulty`
+---|"game_message" # `target, text`
+---|"game_newmap" # `mapname`
+---|"round_start" # `timelimit, fraglimit, objective`
+---|"round_end" # `winner, reason, message, legacy, player_count, nomusic`
+---|"round_start_pre_entity" # ``
+---|"round_start_post_nav" # ``
+---|"round_freeze_end" # ``
+---|"teamplay_round_start" # `full_reset`
+---|"player_death" # `userid, attacker, assister, assistedflash, weapon, weapon_itemid, weapon_fauxitemid, weapon_originalowner_xuid, headshot, dominated, revenge, wipe, penetrated, noreplay, noscope, thrusmoke, attackerblind, distance, userid_pawn, attacker_pawn, assister_pawn`
+---|"player_footstep" # `userid, userid_pawn`
+---|"player_hintmessage" # `hintmessage`
+---|"break_breakable" # `entindex, userid, material, userid_pawn`
+---|"break_prop" # `entindex, userid, userid_pawn`
+---|"entity_killed" # `entindex_killed, entindex_attacker, entindex_inflictor, damagebits`
+---|"door_close" # `userid, checkpoint, userid_pawn`
+---|"vote_started" # `issue, param1, team, initiator`
+---|"vote_failed" # `team`
+---|"vote_passed" # `details, param1, team`
+---|"vote_changed" # `vote_option1, vote_option2, vote_option3, vote_option4, vote_option5, potentialVotes`
+---|"vote_cast_yes" # `team, entityid`
+---|"vote_cast_no" # `team, entityid`
+---|"achievement_event" # `achievement_name, cur_val, max_val`
+---|"achievement_earned" # `player, achievement`
+---|"achievement_write_failed" # ``
+---|"bonus_updated" # `numadvanced, numbronze, numsilver, numgold`
+---|"spec_target_updated" # `userid, target, userid_pawn`
+---|"spec_mode_updated" # `userid`
+---|"entity_visible" # `userid, subject, classname, entityname`
+---|"gameinstructor_draw" # ``
+---|"gameinstructor_nodraw" # ``
+---|"flare_ignite_npc" # `entindex`
+---|"helicopter_grenade_punt_miss" # ``
+---|"physgun_pickup" # `target`
+---|"inventory_updated" # ``
+---|"cart_updated" # ``
+---|"store_pricesheet_updated" # ``
+---|"item_schema_initialized" # ``
+---|"drop_rate_modified" # ``
+---|"event_ticket_modified" # ``
+---|"gc_connected" # ``
+---|"instructor_start_lesson" # `userid, hint_name, hint_target, vr_movement_type, vr_single_controller, vr_controller_type`
+---|"instructor_close_lesson" # `userid, hint_name`
+---|"instructor_server_hint_create" # `userid, hint_name, hint_replace_key, hint_target, hint_activator_userid, hint_timeout, hint_icon_onscreen, hint_icon_offscreen, hint_caption, hint_activator_caption, hint_color, hint_icon_offset, hint_range, hint_flags, hint_binding, hint_gamepad_binding, hint_allow_nodraw_target, hint_nooffscreen, hint_forcecaption, hint_local_player_only`
+---|"clientside_lesson_closed" # `lesson_name`
+---|"dynamic_shadow_light_changed" # ``
+---|"gameui_hidden" # ``
+---|"items_gifted" # `player, itemdef, numgifts, giftidx, accountid`
+---|"player_score" # `userid, kills, deaths, score`
+---|"player_shoot" # `userid, weapon, mode, userid_pawn`
+---|"game_init" # ``
+---|"game_start" # `roundslimit, timelimit, fraglimit, objective`
+---|"game_end" # `winner`
+---|"round_announce_match_point" # ``
+---|"round_announce_final" # ``
+---|"round_announce_last_round_half" # ``
+---|"round_announce_match_start" # ``
+---|"round_announce_warmup" # ``
+---|"round_end_upload_stats" # ``
+---|"round_officially_ended" # ``
+---|"round_time_warning" # ``
+---|"ugc_map_info_received" # `published_file_id`
+---|"ugc_map_unsubscribed" # `published_file_id`
+---|"ugc_map_download_error" # `published_file_id, error_code`
+---|"ugc_file_download_finished" # `hcontent`
+---|"ugc_file_download_start" # `hcontent, published_file_id`
+---|"begin_new_match" # ``
+---|"dm_bonus_weapon_start" # `time, Pos`
+---|"survival_announce_phase" # `phase`
+---|"broken_breakable" # `entindex, userid, material, userid_pawn`
+---|"player_decal" # `userid, userid_pawn`
+---|"achievement_increment" # `achievement_id, cur_val, max_val`
+---|"set_instructor_group_enabled" # `group, enabled`
+---|"instructor_server_hint_stop" # `hint_name`
+---|"read_game_titledata" # `controllerId`
+---|"write_game_titledata" # `controllerId`
+---|"reset_game_titledata" # `controllerId`
+---|"weaponhud_selection" # `userid, mode, entindex, userid_pawn`
+---|"vote_ended" # ``
+---|"vote_cast" # `vote_option, team, userid`
+---|"vote_options" # `count, option1, option2, option3, option4, option5`
+---|"endmatch_mapvote_selecting_map" # `count, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10`
+---|"endmatch_cmm_start_reveal_items" # ``
+---|"client_loadout_changed" # ``
+---|"add_player_sonar_icon" # `userid, pos_x, pos_y, pos_z`
+---|"add_bullet_hit_marker" # `userid, bone, pos_x, pos_y, pos_z, ang_x, ang_y, ang_z, start_x, start_y, start_z, hit`
+---|"other_death" # `otherid, othertype, attacker, weapon, weapon_itemid, weapon_fauxitemid, weapon_originalowner_xuid, headshot, penetrated, noscope, thrusmoke, attackerblind`
+---|"item_purchase" # `userid, team, loadout, weapon`
+---|"bomb_beginplant" # `userid, site, userid_pawn`
+---|"bomb_abortplant" # `userid, site, userid_pawn`
+---|"bomb_planted" # `userid, site, userid_pawn`
+---|"bomb_defused" # `userid, site, userid_pawn`
+---|"bomb_exploded" # `userid, site, userid_pawn`
+---|"bomb_dropped" # `userid, entindex, userid_pawn`
+---|"bomb_pickup" # `userid, userid_pawn`
+---|"defuser_dropped" # `entityid`
+---|"defuser_pickup" # `entityid, userid, userid_pawn`
+---|"announce_phase_end" # ``
+---|"cs_intermission" # ``
+---|"bomb_begindefuse" # `userid, haskit, userid_pawn`
+---|"bomb_abortdefuse" # `userid, userid_pawn`
+---|"hostage_follows" # `userid, hostage, userid_pawn`
+---|"hostage_hurt" # `userid, hostage, userid_pawn`
+---|"hostage_killed" # `userid, hostage, userid_pawn`
+---|"hostage_rescued" # `userid, hostage, site, userid_pawn`
+---|"hostage_stops_following" # `userid, hostage, userid_pawn`
+---|"hostage_rescued_all" # ``
+---|"hostage_call_for_help" # `hostage`
+---|"vip_escaped" # `userid`
+---|"vip_killed" # `userid, attacker`
+---|"player_radio" # `userid, slot, userid_pawn`
+---|"bomb_beep" # `entindex`
+---|"weapon_fire" # `userid, weapon, silenced, userid_pawn`
+---|"weapon_fire_on_empty" # `userid, weapon, userid_pawn`
+---|"grenade_thrown" # `userid, weapon, userid_pawn`
+---|"weapon_outofammo" # `userid, userid_pawn`
+---|"weapon_reload" # `userid, userid_pawn`
+---|"weapon_zoom" # `userid, userid_pawn`
+---|"silencer_detach" # `userid, userid_pawn`
+---|"inspect_weapon" # `userid, userid_pawn`
+---|"weapon_zoom_rifle" # `userid, userid_pawn`
+---|"player_spawned" # `userid, inrestart, userid_pawn`
+---|"item_pickup" # `userid, item, silent, defindex`
+---|"item_pickup_slerp" # `userid, index, behavior`
+---|"item_pickup_failed" # `userid, item, reason, limit`
+---|"item_remove" # `userid, item, defindex`
+---|"ammo_pickup" # `userid, item, index`
+---|"item_equip" # `userid, item, defindex, canzoom, hassilencer, issilenced, hastracers, weptype, ispainted`
+---|"enter_buyzone" # `userid, canbuy`
+---|"exit_buyzone" # `userid, canbuy`
+---|"buytime_ended" # ``
+---|"enter_bombzone" # `userid, hasbomb, isplanted`
+---|"exit_bombzone" # `userid, hasbomb, isplanted`
+---|"enter_rescue_zone" # `userid`
+---|"exit_rescue_zone" # `userid`
+---|"silencer_off" # `userid`
+---|"silencer_on" # `userid`
+---|"buymenu_open" # `userid`
+---|"buymenu_close" # `userid`
+---|"round_prestart" # ``
+---|"round_poststart" # ``
+---|"grenade_bounce" # `userid, userid_pawn`
+---|"hegrenade_detonate" # `userid, entityid, x, y, z, userid_pawn`
+---|"flashbang_detonate" # `userid, entityid, x, y, z, userid_pawn`
+---|"smokegrenade_detonate" # `userid, entityid, x, y, z, userid_pawn`
+---|"smokegrenade_expired" # `userid, entityid, x, y, z, userid_pawn`
+---|"molotov_detonate" # `userid, x, y, z, userid_pawn`
+---|"decoy_detonate" # `userid, entityid, x, y, z, userid_pawn`
+---|"decoy_started" # `userid, entityid, x, y, z, userid_pawn`
+---|"tagrenade_detonate" # `userid, entityid, x, y, z`
+---|"inferno_startburn" # `entityid, x, y, z`
+---|"inferno_expire" # `entityid, x, y, z`
+---|"inferno_extinguish" # `entityid, x, y, z`
+---|"decoy_firing" # `userid, entityid, x, y, z, userid_pawn`
+---|"bullet_impact" # `userid, x, y, z, userid_pawn`
+---|"player_jump" # `userid`
+---|"player_blind" # `userid, attacker, entityid, blind_duration`
+---|"player_falldamage" # `userid, damage, userid_pawn`
+---|"door_moving" # `userid, entindex, userid_pawn`
+---|"mb_input_lock_success" # ``
+---|"mb_input_lock_cancel" # ``
+---|"nav_blocked" # `area, blocked`
+---|"nav_generate" # ``
+---|"achievement_info_loaded" # ``
+---|"hltv_changed_mode" # `oldmode, newmode, obs_target`
+---|"cs_game_disconnected" # ``
+---|"cs_round_final_beep" # ``
+---|"cs_round_start_beep" # ``
+---|"cs_win_panel_round" # `show_timer_defend, show_timer_attack, timer_time, final_event, funfact_token, funfact_player, funfact_data1, funfact_data2, funfact_data3`
+---|"cs_win_panel_match" # ``
+---|"cs_match_end_restart" # ``
+---|"cs_pre_restart" # ``
+---|"show_deathpanel" # `victim, killer, killer_controller, hits_taken, damage_taken, hits_given, damage_given, victim_pawn`
+---|"hide_deathpanel" # ``
+---|"player_avenged_teammate" # `avenger_id, avenged_player_id`
+---|"achievement_earned_local" # `achievement, splitscreenplayer`
+---|"repost_xbox_achievements" # `splitscreenplayer`
+---|"match_end_conditions" # `frags, max_rounds, win_rounds, time`
+---|"round_mvp" # `userid, reason, value, musickitmvps, nomusic, musickitid`
+---|"show_survival_respawn_status" # `loc_token, duration, userid, userid_pawn`
+---|"client_disconnect" # ``
+---|"gg_player_levelup" # `userid, weaponrank, weaponname`
+---|"ggtr_player_levelup" # `userid, weaponrank, weaponname`
+---|"ggprogressive_player_levelup" # `userid, weaponrank, weaponname`
+---|"gg_killed_enemy" # `victimid, attackerid, dominated, revenge, bonus`
+---|"gg_final_weapon_achieved" # `userid`
+---|"gg_bonus_grenade_achieved" # `userid`
+---|"switch_team" # `numPlayers, numSpectators, avg_rank, numTSlotsFree, numCTSlotsFree`
+---|"gg_leader" # `userid`
+---|"gg_team_leader" # `userid`
+---|"gg_player_impending_upgrade" # `userid`
+---|"write_profile_data" # ``
+---|"trial_time_expired" # `userid`
+---|"update_matchmaking_stats" # ``
+---|"player_reset_vote" # `userid, vote`
+---|"enable_restart_voting" # `enable`
+---|"sfuievent" # `action, data, slot`
+---|"start_vote" # `userid, type, vote_parameter`
+---|"player_given_c4" # `userid`
+---|"gg_reset_round_start_sounds" # `userid`
+---|"tr_player_flashbanged" # `userid`
+---|"tr_mark_complete" # `complete`
+---|"tr_mark_best_time" # `time`
+---|"tr_exit_hint_trigger" # ``
+---|"bot_takeover" # `userid, botid, userid_pawn`
+---|"tr_show_finish_msgbox" # ``
+---|"tr_show_exit_msgbox" # ``
+---|"jointeam_failed" # `userid, reason`
+---|"teamchange_pending" # `userid, toteam`
+---|"material_default_complete" # ``
+---|"cs_prev_next_spectator" # `next`
+---|"cs_handle_ime_event" # `eventtype, eventdata`
+---|"nextlevel_changed" # `nextlevel, mapgroup, skirmishmode`
+---|"seasoncoin_levelup" # `userid, category, rank`
+---|"tournament_reward" # `defindex, totalrewards, accountid`
+---|"start_halftime" # ``
+---|"ammo_refill" # `userid, success`
+---|"parachute_pickup" # `userid`
+---|"parachute_deploy" # `userid`
+---|"dronegun_attack" # `userid`
+---|"drone_dispatched" # `userid, priority, drone_dispatched`
+---|"loot_crate_visible" # `userid, subject, type`
+---|"loot_crate_opened" # `userid, type`
+---|"open_crate_instr" # `userid, subject, type`
+---|"smoke_beacon_paradrop" # `userid, paradrop`
+---|"survival_paradrop_spawn" # `entityid`
+---|"survival_paradrop_break" # `entityid`
+---|"drone_cargo_detached" # `userid, cargo, delivered`
+---|"drone_above_roof" # `userid, cargo`
+---|"choppers_incoming_warning" # `global`
+---|"firstbombs_incoming_warning" # `global`
+---|"dz_item_interaction" # `userid, subject, type`
+---|"survival_teammate_respawn" # `userid`
+---|"survival_no_respawns_warning" # `userid`
+---|"survival_no_respawns_final" # `userid`
+---|"player_ping" # `userid, entityid, x, y, z, urgent, userid_pawn`
+---|"player_ping_stop" # `entityid`
+---|"player_sound" # `userid, radius, duration, step, userid_pawn`
+---|"guardian_wave_restart" # ``
+---|"team_intro_start" # ``
+---|"team_intro_end" # ``

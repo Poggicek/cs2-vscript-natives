@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import events from './data/events';
 
 function setExternalLibrary(folder: string, enable: boolean) {
 	const extensionId = "poggudev.cs2-vscript-natives"; // this id is case sensitive
@@ -50,6 +51,50 @@ export function activate(context: vscode.ExtensionContext) {
 		setExternalLibrary("EmmyLua", true);
 		context.globalState.update("disableExternalLib", 0);
 	}));
+
+	const hover = vscode.languages.registerHoverProvider(
+		"lua",
+		{
+			provideHover(document: vscode.TextDocument, position: vscode.Position) {
+				const range = document.getWordRangeAtPosition(position, /(["'])(?:(?=(\\?))\2.)*?\1/);
+				if (range) {
+					const word = document.getText(range).replace(/\"|\'/g, "").toLowerCase();
+					if (events[word]) {
+						return onEventHover(word);
+					}
+				}
+			}
+		}
+	);
+}
+
+// Thanks to https://github.com/Ketho/vscode-wow-api
+function getEventMarkdown(name: string) {
+	let event = events[name];
+	let s = "**Event**\n\n";
+
+	if(event.comment)
+	{
+		s += `${event.comment}\n`;
+	}
+
+	s += "```\n";
+
+	event.args.forEach((r, i) => {
+		s += `${r.name}: ${r.type}\n`;
+	});
+
+	s += "```\n";
+
+	let doc = `\n[Documentation](https://cs2.poggu.me/dumped-data/game-events#${name})`;
+	return s+doc;
+}
+
+function onEventHover(name: string)
+{
+	let md = new vscode.MarkdownString(getEventMarkdown(name));
+	let item = new vscode.Hover(md);
+	return item;
 }
 
 // This method is called when your extension is deactivated
