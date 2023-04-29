@@ -996,3 +996,5 @@ function EntFireByHandle(self, target, action, value, delay, activator) end
 ---@param name string
 ---@return function
 function Dynamic_Wrap(mt, name) end
+
+debugoverlay = CDebugOverlayScriptHelper
