@@ -997,4 +997,18 @@ function EntFireByHandle(self, target, action, value, delay, activator) end
 ---@return function
 function Dynamic_Wrap(mt, name) end
 
+---Constructs a Vector
+---@param x number X-Axis
+---@param y number Y-Axis
+---@param z number Z-Axis
+---@return Vector
+function Vector(x, y, z) end
+
+---Constructs a QAngle
+---@param x number Pitch angle
+---@param y number Yaw angle
+---@param z number Roll angle
+---@return QAngle
+function QAngle(x, y, z) end
+
 debugoverlay = CDebugOverlayScriptHelper

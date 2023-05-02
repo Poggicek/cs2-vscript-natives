@@ -1,7 +1,6 @@
 ---@meta
 
 ---@class Vector
----@overload fun(x: number, y: number, z: number):Vector
 ---@operator add(Vector): Vector
 ---@operator div(Vector): Vector
 ---@operator len(Vector): Vector
@@ -11,7 +10,7 @@
 ---@field public x number X-Axis
 ---@field public y number Y-Axis
 ---@field public z number Z-Axis
-Vector = {}
+local Vector = {}
 
 ---Adds two Vectors together. Overloaded with + operator
 ---@param a Vector

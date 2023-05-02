@@ -1,12 +1,11 @@
 ---@meta
 
 ---@class QAngle
----@overload fun(x: number, y: number, z: number):QAngle
----@operator add(Vector): QAngle
+---@operator add(QAngle): QAngle
 ---@field public x number Pitch angle
 ---@field public y number Yaw angle
 ---@field public z number Roll angle
-QAngle = {}
+local QAngle = {}
 
 ---Adds two QAngles together. Overloaded with + operator. Use RotateOrientation() instead to properly rotate angles.
 ---@param a QAngle
